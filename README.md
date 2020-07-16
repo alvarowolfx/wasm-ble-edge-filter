@@ -87,3 +87,4 @@ Steps to update WASM code:
 #### References
 
 - https://github.com/AssemblyScript/assemblyscript
+- https://github.com/wasm3/wasm3
