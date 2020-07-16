@@ -14,16 +14,20 @@ void setup()
 {
   // Setup reset pin
   Serial.begin(115200);
+  SPIFFS.begin(true);
 
   setupConfig();
 
   Serial.print("[INIT] Device ID: ");
   Serial.println(globalConfig.deviceName);
 
+  Serial.print("[INIT] Rules version: ");
+  Serial.println(globalConfig.deviceRuleVersion);
+
   setupScanner();
 
-  xTaskCreate(&networkTask, "network", 4 * 1024, NULL, 5, NULL);
-  xTaskCreatePinnedToCore(&scannerTask, "scanner", NATIVE_STACK_SIZE, NULL, 4, NULL, 1);
+  xTaskCreatePinnedToCore(&networkTask, "network", 4 * 1024, NULL, 5, NULL, 1);
+  xTaskCreatePinnedToCore(&scannerTask, "scanner", NATIVE_STACK_SIZE, NULL, 4, NULL, 0);
 }
 
 void loop()

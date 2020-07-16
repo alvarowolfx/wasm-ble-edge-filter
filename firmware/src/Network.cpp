@@ -1,4 +1,5 @@
 #include "Network.h"
+#include "OTA.h"
 #include <WiFi.h>
 
 void printWifiStatus()
@@ -91,6 +92,7 @@ void networkTask(void *p)
       else
       {
         Serial.println("[WIFI] Connected to WiFi");
+        xTaskCreatePinnedToCore(&checkOTATask, "ota", 8 * 1024, NULL, 10, NULL, 1);
       }
     }
     vTaskDelay(100 / portTICK_PERIOD_MS);

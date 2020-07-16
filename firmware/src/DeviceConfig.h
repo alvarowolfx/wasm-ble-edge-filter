@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <SPIFFS.h>
-
+#include <Preferences.h>
 struct DeviceConfig
 {
   // your network SSID (name)
@@ -11,18 +11,21 @@ struct DeviceConfig
   // your network password (use for WPA)
   char wifiPass[50] = "FullStackIoT";
 
-  char serverHost[100] = "http://remote-server";
+  char serverHost[100] = "http://192.168.86.118:3000";
   char serverSendDataPath[50] = "/data";
-  char serverCheckScriptPath[50] = "/script";
-  char serverDownloadScript[50] = "/script";
+  char serverCheckVersionPath[50] = "/devices/%s/version";
+  char serverFetchRule[50] = "/rules/%s/app.wasm";
 
   char deviceId[24] = "";
   char deviceName[24] = "";
   int scanTime = 2; //10; // ble scan time in seconds
+
+  char deviceRuleVersion[24] = "";
 };
 
 extern DeviceConfig globalConfig;
 
 void setupConfig();
+void saveVersion(const char *version);
 
 #endif // DEVICE_CONFIG_H_

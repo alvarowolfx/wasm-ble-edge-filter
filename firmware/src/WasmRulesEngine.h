@@ -7,8 +7,8 @@
 #include <m3_api_defs.h>
 #include <m3_env.h>
 
-#define WASM_STACK_SLOTS 8 * 1024
-#define NATIVE_STACK_SIZE 32 * 1024
+#define WASM_STACK_SLOTS 4 * 1024
+#define NATIVE_STACK_SIZE 24 * 1024
 
 void setupRulesEngine();
 bool filterDevice(std::string name, std::string address, std::string serviceData, std::string serviceUuid, int rssi);
