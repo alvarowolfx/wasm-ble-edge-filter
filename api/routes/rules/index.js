@@ -69,8 +69,12 @@ export function _filter(): bool {
 module.exports = async function (fastify, opts) {
 
   fastify.get('/', function (request, reply) {
-    this.rulesDb.find({}, (err, docs) => {
-      reply.send(docs)
+    this.rulesDb.find({}, (err, versions) => {
+      reply.send(versions.map( v => ({
+        versionName : v._id,
+        byteLength : v.byteLength,
+        createdAt: v.createdAt
+      })))
     })
   })
 

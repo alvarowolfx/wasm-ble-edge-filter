@@ -37,7 +37,7 @@ module.exports = async function (fastify, opts) {
   fastify.get('/:deviceId/version', function (request, reply) {
     const { deviceId } = request.params
     this.devicesDb.findOne({ _id: deviceId }, (err, device) => {
-      reply.send(device.versionName)
+      reply.send((device && device.versionName) || "")
     })
   })
 
